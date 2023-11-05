@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Hello Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+</head>
+
+<body>
+
+    <div id="map" style="width: 800px; height: 600px;"></div>
+    <script>
+
+        const map = L.map('map').setView([33.500923, //latitude
+        -112.423018], //longitude
+            11);    //zoom
+
+            L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+            attribution: 'Copyright Google Maps'
+            }).addTo(map);
+
+            var popup = L.popup()
+           .setLatLng([33.527309, -112.262260])
+           .setContent("State Farm Stadium")
+           .openOn(map);
+
+           var circle = L.circle([33.422280, -112.173460], {radius:2000}).addTo(map);
+
+           var circle = L.circle([33.586023, -112.559738], {radius:6000}).addTo(map);
+
+           var marker = L.marker([33.500923, -112.423018]).addTo(map);
+
+           var latlngs = [[33.500923, -112.423018], [33.525719, -112.370880], [33.528170, -112.407210]];
+            var polygon = L.polygon(latlngs, {color: 'pink', fillOpacity: 0.8, weight:6}).addTo(map);
+
+            function onMapClick(e) {
+        alert("You clicked the map at " + e.latlng);
+
+        polygon.bindPopup("<b>Testing! </b>I am a pink triangle.");
+        circle.bindPopup("<b>Testing! </b>I am a blue circle.");
+        
+}
+
+map.on('click', onMapClick);
+
+
+
+</script>
+</body>
+</html>
